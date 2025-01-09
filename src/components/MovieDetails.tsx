@@ -17,22 +17,20 @@ const MovieDetails: React.FC = observer(() => {
 
     // Загрузка деталей фильма из OMDB
     getMovieDetails(id).then((movie: any) => {
-      console.log(movie)
+      console.log(movie);
       detailedMovieStore.setDetailedMovie(movie);
     });
   }, [id]);
 
   return (
     <div>
-      <div>
-        <Button
-          variant="outlined"
-          onClick={() => navigate(-1)}
-          style={{ marginBottom: "20px" }}
-        >
-          Назад
-        </Button>
-      </div>
+      <Button
+        variant="outlined"
+        onClick={() => navigate(-1)}
+        style={{ marginBottom: "20px" }}
+      >
+        Назад
+      </Button>
       {detailedMovieStore.detailedMovie && (
         <Card>
           <CardContent>

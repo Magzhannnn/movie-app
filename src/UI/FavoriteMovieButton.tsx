@@ -1,6 +1,7 @@
 import React from "react";
 import favoriteMovieStore from "../stores/FavoriteMovieStore";
 import { Button } from "@mui/material";
+import { observer } from "mobx-react";
 
 interface FavoriteMovieProps {
   movie: {
@@ -8,7 +9,7 @@ interface FavoriteMovieProps {
   };
 }
 
-const FavoriteMovieButton: React.FC<FavoriteMovieProps> = ({ movie }) => {
+const FavoriteMovieButton: React.FC<FavoriteMovieProps> = observer(({ movie }) => {
   const handleFavoriteMovie = (movie: any) => {
     const isFindFavoriteMovieById = favoriteMovieStore.isFindFavoriteMovieById(
       movie.imdbID
@@ -37,6 +38,6 @@ const FavoriteMovieButton: React.FC<FavoriteMovieProps> = ({ movie }) => {
       to Favorites
     </Button>
   );
-};
+});
 
 export default FavoriteMovieButton;
