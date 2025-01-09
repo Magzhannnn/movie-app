@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { observer } from "mobx-react";
 import movieStore from "../stores/MovieStore";
-import favoriteMovieStore from "../stores/FavoriteMovieStore";
 import { getMovies } from "../services/api";
-import {
-  Typography,
-  TextField,
-  Grid,
-  Card,
-  CardContent,
-  Button,
-  CircularProgress,
-  Pagination,
-} from "@mui/material";
+import { TextField, CircularProgress, Pagination } from "@mui/material";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import useDebounce from "../hooks/useDebounce";
+import MovieSlider from "./MovieSlider";
 
-const MoviesList: React.FC = observer(() => {
+const MoviesList: React.FC = () => {
   const [query, setQuery] = useState<string>("");
   const debouncedQuery = useDebounce(query, 300);
   const [loading, setLoading] = useState<boolean>(false);
@@ -40,25 +32,18 @@ const MoviesList: React.FC = observer(() => {
     setPage(value); // Меняем страницу
   };
 
-  const handleFavoriteMovie = (movie: any) => {
-    const isFindFovoriteMovieById = favoriteMovieStore.isFindFovoriteMovieById(
-      movie.imdbID
-    );
-
-    if (!isFindFovoriteMovieById) {
-      favoriteMovieStore.addFavoriteMovie(movie);
-    } else {
-      favoriteMovieStore.removeFavoriteMovie(movie);
-    }
+  const setQueryHandle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPage(1);
+    setQuery(event.target.value);
   };
 
   return (
-    <div>
+    <div className="movies-list-container">
       <TextField
         label="Search Movies"
         variant="outlined"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={setQueryHandle}
         fullWidth
       />
       {loading && (
@@ -68,47 +53,29 @@ const MoviesList: React.FC = observer(() => {
           <CircularProgress />
         </div>
       )}
-      <Grid container spacing={2} marginTop={2}>
-        {movieStore.movies ? (
-          movieStore.movies.map((movie: any) => (
-            <Grid item xs={4} key={movie.imdbID}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h6">{movie.Title}</Typography>
-                  <Typography variant="body2">Year: {movie.Year}</Typography>
-                  <Button
-                    variant={
-                      !favoriteMovieStore.isFindFovoriteMovieById(movie.imdbID)
-                        ? "outlined"
-                        : "contained"
-                    }
-                    onClick={() => handleFavoriteMovie(movie)}
-                  >
-                    {!favoriteMovieStore.isFindFovoriteMovieById(movie.imdbID)
-                      ? "Add"
-                      : "Remove"}{" "}
-                    to Favorites
-                  </Button>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))
-        ) : (
-          <p>No movies available</p>
-        )}
-      </Grid>
+
+      {movieStore.movies && movieStore.movies.length > 0 ? (
+        <MovieSlider movies={movieStore.movies} />
+      ) : (
+        <p style={{ textAlign: "center", marginTop: 20 }}>
+          No movies available
+        </p>
+      )}
 
       {movieStore.movies && movieStore.movies.length > 0 && (
-        <Pagination
-          count={totalPages}
-          page={page}
-          onChange={handleChangePage}
-          color="primary"
-          style={{ marginTop: 20 }}
-        />
+        <div className="pagination-container">
+          <Pagination
+            className="pagination"
+            count={totalPages}
+            page={page}
+            onChange={handleChangePage}
+            color="primary"
+            size="large"
+          />
+        </div>
       )}
     </div>
   );
-});
+};
 
 export default MoviesList;

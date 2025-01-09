@@ -13,12 +13,14 @@ class FavoriteMovieStore {
     this.loadFavoriteMovies();
   }
 
-  isFindFovoriteMovieById(movieImdbID: string) {
-    return this.favoriteMovies.has(movieImdbID);
+  isFindFavoriteMovieById(movieImDbID: string) {
+    return this.favoriteMovies.has(movieImDbID);
   }
 
   loadFavoriteMovies() {
-    const storedFavorites = JSON.parse(getLocalStorage("favoriteMovies") ?? "false");
+    const storedFavorites = JSON.parse(
+      getLocalStorage("favoriteMovies") ?? "false"
+    );
     if (storedFavorites) {
       this.favoriteMovies = new Map(storedFavorites);
     }
