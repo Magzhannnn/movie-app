@@ -33,7 +33,7 @@ const MovieDetails: React.FC = observer(() => {
       </Button>
       {detailedMovieStore.detailedMovie && (
         <Card>
-          <CardContent>
+          <CardContent className="card-content">
             <MovieInfo movie={detailedMovieStore.detailedMovie} />
             <VideoPlayer />
           </CardContent>

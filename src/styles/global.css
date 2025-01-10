@@ -76,7 +76,13 @@
   width: max-content;
 }
 
-/* ? кнопка для избранных */
+/* Card-Content */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .favorite-button {
-  margin: 20px 0;
+  width: max-content;
 }

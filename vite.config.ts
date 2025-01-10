@@ -8,5 +8,6 @@ export default defineConfig({
     hmr: {
       overlay: false,
     },
+    port: 3000, // Устанавливаем статический порт
   },
 });

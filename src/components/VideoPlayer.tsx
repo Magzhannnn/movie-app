@@ -3,7 +3,7 @@ import axios from "axios";
 import { getLocalStorage, setLocalStorage } from "../utils/localStorage";
 import detailedMovieStore from "../stores/DetailedMovieStore";
 
-const YOUTUBE_API_KEY = "AIzaSyBOkinROTqw3SzzSKXuGS7PLMHZf7qGz2c";
+const YOUTUBE_API_KEY = "AIzaSyDngrctixzI2x6CmOJstzSsmJYTpaLtKQA";
 
 const VideoPlayer: React.FC = () => {
   const youtubeRef = useRef<HTMLIFrameElement | null>(null);
@@ -66,7 +66,7 @@ const VideoPlayer: React.FC = () => {
   return isLoadingTrailerVideo ? (
     <p>Loading...</p>
   ) : (
-    <div>
+    <div className="video-player">
       {youtubeVideoId ? (
         <iframe
           ref={youtubeRef}
@@ -77,11 +77,11 @@ const VideoPlayer: React.FC = () => {
           frameBorder="0"
           allowFullScreen
         ></iframe>
-      ): (
+      ) : (
         <img
           src={detailedMovieStore.detailedMovie.Poster}
           alt={detailedMovieStore.detailedMovie.Title}
-          style={{ maxWidth: "100%", marginTop: "20px" }}
+          style={{ maxWidth: "100%" }}
         />
       )}
     </div>
