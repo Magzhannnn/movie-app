@@ -5,6 +5,7 @@ import FavoriteMovies from "./components/FavoriteMovies";
 import { CssBaseline, Container, Typography } from "@mui/material";
 import MoviesList from "./components/MoviesList";
 import "./styles/global.css";
+import Nav from "./UI/Nav";
 
 const App: React.FC = () => {
   if ("serviceWorker" in navigator) {
@@ -29,6 +30,7 @@ const App: React.FC = () => {
           Movie App
         </Typography>
         <Router>
+          <Nav />
           <Routes>
             <Route path="/" element={<MoviesList />} />
             <Route path="/movie/:id" element={<MovieDetails />} />

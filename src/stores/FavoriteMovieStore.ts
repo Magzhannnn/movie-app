@@ -13,6 +13,10 @@ class FavoriteMovieStore {
     this.loadFavoriteMovies();
   }
 
+  get getFavoriteMovies() {
+    return Array.from(this.favoriteMovies.values());
+  }
+
   isFindFavoriteMovieById(movieImDbID: string) {
     return this.favoriteMovies.has(movieImDbID);
   }

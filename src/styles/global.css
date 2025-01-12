@@ -13,7 +13,7 @@
   width: 100%;
   height: 300px;
   object-fit: cover;
-  border-radius: 8px;
+  /* border-radius: 8px; */
 }
 
 .thumbnail-slider .thumbnail-card {
@@ -85,4 +85,43 @@
 
 .favorite-button {
   width: max-content;
+}
+
+/* Favorite Movie */
+.empty-text {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.link-go-back {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 20px;
+
+  margin-left: 10px;
+}
+
+/* Navigation Route */
+.nav-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-content {
+  font-size: 18px;
+  text-decoration: none;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.nav-content:hover {
+  text-decoration: underline;
+}
+
+.active-nav-content {
+  color: #1976d2;
+}
+.active-nav-content:hover {
+  text-decoration: none;
 }
